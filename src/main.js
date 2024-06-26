@@ -31,28 +31,32 @@ refs.formSearch.addEventListener('submit', event => {
     }
     
     showLoader();
+
     refs.imgGallery.innerHTML = ' ';
+
     searchImages(imgKeyWord)
         .then(({ hits }) => {
-      if (hits.length === 0) {
-        iziToast.error({
-          title: 'Error',
-          message:
-            'Sorry, there are no images matching your search query. Please try again!',
-          layout: 2,
-          position: 'topRight',
-          displayMode: 'once',
-          color: '#ef4040',
-          messageColor: '#fff',
-          messageSize: '16',
-        });
+            if (hits.length === 0) {
+                iziToast.error({
+                    title: 'Error',
+                    message:
+                        'Sorry, there are no images matching your search query. Please try again!',
+                        position: 'topRight',
+                        displayMode: 'once',
+                        color: '#ef4040',
+                        messageColor: '#fff',
+                        messageSize: '16',
+                        layout: 2,
+                });
+                
         hideLoader();
         formReset();
         return;
-      }
-      hideLoader();
-          markupGallery(hits);
-      formReset();
+            }
+            
+        hideLoader();
+         markupGallery(hits);
+        formReset();
     })
     .catch(error => {
       console.log(error);
